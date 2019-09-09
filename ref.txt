@@ -1,0 +1,30 @@
+https://towardsdatascience.com/deploying-a-machine-learning-model-as-a-rest-api-4a03b865c166
+
+https://github.com/bentoml/BentoML
+https://github.com/apinf/ml-rest
+
+Frontend
+- Vue JS
+*-- Render components in Gmail
+-- Send API requests to the Flask api for sentiment score
+
+Backend
+- Flask
+*-- Wrap model and serve as API
+
+
+Front-end install instructions
+- Download VSCode
+- Download NodeJS
+- Open the project directroy in VSCode
+- Open the terminal in VSCode and enter command `npm install`
+- After it is finished, run npm run watch:dev
+- Now open chrome:://extensions
+- Enable developer mode
+- Click on load unpacked,
+- Open the dist folder of our app and load extension
+
+
+Git
+- Install git for windows
+- Open VSCode and clone repo
