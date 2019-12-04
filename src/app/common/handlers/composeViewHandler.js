@@ -9,8 +9,7 @@ import Bulb from '../../components/Bulb/Bulb';
 // Helper functions
 import { addIconToComposeView } from '../setupCompose';
 
-
-const composeViewHandler = function (composeView) {
+const composeViewHandler = function(composeView) {
   // a compose view has come into existence, do something with it!
 
   const composeBox = composeView.getBodyElement().closest('.inboxsdk__compose');

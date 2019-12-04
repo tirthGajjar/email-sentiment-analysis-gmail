@@ -6,7 +6,6 @@ import router from '../../router';
 // Components
 import Bulb from '../../components/Bulb/Bulb';
 
-
 export async function handleAppToolBar(sdk) {
   sdk.Toolbars.addToolbarButtonForApp({
     title: 'Test',
