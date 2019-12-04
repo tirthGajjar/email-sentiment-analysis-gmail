@@ -12,8 +12,14 @@ global.browser = require('webextension-polyfill');
 
 Vue.prototype.$browser = global.browser;
 
-InboxSDK.load(INBOX_SDK_VERSION, INBOX_SDK_KEY).then(function(sdk) {
+async function load() {
+  const sdk = await InboxSDK.load(INBOX_SDK_VERSION, INBOX_SDK_KEY);
   // the SDK has been loaded, now do something with it!
   handleComposeViews(sdk);
-  handleAppToolBar(sdk);
-});
+  await handleAppToolBar(sdk);
+}
+
+load();
+
+
+

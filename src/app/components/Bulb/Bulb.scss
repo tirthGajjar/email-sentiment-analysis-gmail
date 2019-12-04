@@ -1,5 +1,24 @@
 .frame {
   width: 100px;
+  height: 10px;
+  border-radius: 2px;
+  background: transperent;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  right: 19px;
+  position: absolute;
+  margin: 11px;
+  width: 0;
+}
+
+.frame.appIcon {
+  position: relative;
+  top: -6px;
+}
+
+.emotioconFrame {
+  width: 100px;
   height: 100px;
   border-radius: 2px;
   background: transperent;
@@ -8,9 +27,14 @@
   -moz-osx-font-smoothing: grayscale;
   right: 19px;
   position: absolute;
-  height: 10px;
   margin: 11px;
   width: 0;
+
+  svg {
+    position: absolute;
+    z-index: 1;
+    left: -13px;
+  }
 }
 
 .bulb {
@@ -44,7 +68,7 @@
   &:before,
   &:after {
     opacity: 0;
-    content: "";
+    content: '';
     position: absolute;
     width: 15px;
     height: 15px;
@@ -270,4 +294,8 @@
   100% {
     opacity: 0;
   }
+}
+
+.emotion-score-trigger {
+  display: none;
 }
