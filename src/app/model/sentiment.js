@@ -1,10 +1,9 @@
 import * as tf from '@tensorflow/tfjs';
 
-const PAD_INDEX = 0;  // Index of the padding character.
-const OOV_INDEX = 2;  // Index fo the OOV character.
+const PAD_INDEX = 0; // Index of the padding character.
+const OOV_INDEX = 2; // Index fo the OOV character.
 
-function padSequences(
-  sequences, maxLen, padding = 'pre', truncating = 'pre', value = PAD_INDEX) {
+function padSequences(sequences, maxLen, padding = 'pre', truncating = 'pre', value = PAD_INDEX) {
   // TODO(cais): This perhaps should be refined and moved into tfjs-preproc.
   return sequences.map(seq => {
     // Perform truncation.
@@ -33,17 +32,14 @@ function padSequences(
   });
 }
 
-
 const HOSTED_URLS = {
-  model:
-    'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json',
-  metadata:
-    'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json'
+  model: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json',
+  metadata: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json',
 };
 
 const LOCAL_URLS = {
   model: './resources/model.json',
-  metadata: './resources/metadata.json'
+  metadata: './resources/metadata.json',
 };
 
 async function loadHostedPretrainedModel(url) {
@@ -77,8 +73,7 @@ class SentimentPredictor {
   }
 
   async loadMetadata() {
-    const sentimentMetadata =
-      await loadHostedMetadata(this.urls.metadata);
+    const sentimentMetadata = await loadHostedMetadata(this.urls.metadata);
     this.indexFrom = sentimentMetadata['index_from'];
     this.maxLen = sentimentMetadata['max_len'];
     console.log('indexFrom = ' + this.indexFrom);
@@ -91,8 +86,11 @@ class SentimentPredictor {
 
   predict(text) {
     // Convert to lower case and remove all punctuations.
-    const inputText =
-      text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split(' ');
+    const inputText = text
+      .trim()
+      .toLowerCase()
+      .replace(/(\.|\,|\!)/g, '')
+      .split(' ');
     // Convert the words to a sequence of word indices.
     const sequence = inputText.map(word => {
       let wordIndex = this.wordIndex[word] + this.indexFrom;
@@ -111,9 +109,9 @@ class SentimentPredictor {
     predictOut.dispose();
     const endMs = performance.now();
 
-    return { score: score, elapsed: (endMs - beginMs) };
+    return { score: score, elapsed: endMs - beginMs };
   }
-};
+}
 
 async function prepUI() {
   const reviewText = document.getElementById('review-text');
@@ -124,7 +122,7 @@ async function prepUI() {
 function doPredict(predict) {
   const reviewText = document.getElementById('review-text');
   const result = predict(reviewText.value);
-  document.getElementById('status').textContent = `Inference result (0 - negative; 1 - positive): ${result.score.toFixed(6)} (elapsed: ${result.elapsed.toFixed(2)} ms)`
+  document.getElementById('status').textContent = `Inference result (0 - negative; 1 - positive): ${result.score.toFixed(6)} (elapsed: ${result.elapsed.toFixed(2)} ms)`;
 }
 
 export async function setupSentiment() {

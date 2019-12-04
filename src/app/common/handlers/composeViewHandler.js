@@ -9,11 +9,13 @@ import Bulb from '../../components/Bulb/Bulb';
 // Helper functions
 import { addIconToComposeView } from '../setupCompose';
 
+
 const composeViewHandler = function (composeView) {
   // a compose view has come into existence, do something with it!
+
   const composeBox = composeView.getBodyElement().closest('.inboxsdk__compose');
   const stickyBulbNode = addIconToComposeView(composeBox);
-  composeView.on('bodyChanged', (e) => {
+  composeView.on('bodyChanged', () => {
     const emailText = composeView.getTextContent();
     const emotionScoreTriggerInput = composeBox.querySelector('.emotion-score-trigger');
     emotionScoreTriggerInput.value = emailText;
@@ -21,6 +23,7 @@ const composeViewHandler = function (composeView) {
     event.initEvent('input', true, true);
     emotionScoreTriggerInput.dispatchEvent(event);
   });
+
   new Vue({
     el: stickyBulbNode,
     store,
