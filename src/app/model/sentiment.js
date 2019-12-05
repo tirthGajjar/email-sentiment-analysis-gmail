@@ -1,5 +1,8 @@
 import * as tf from '@tensorflow/tfjs';
 
+import { model } from "../common/constants/model";
+import { metadata } from "../common/constants/metadata";
+
 const PAD_INDEX = 0; // Index of the padding character.
 const OOV_INDEX = 2; // Index fo the OOV character.
 
@@ -32,15 +35,11 @@ function padSequences(sequences, maxLen, padding = 'pre', truncating = 'pre', va
   });
 }
 
-const HOSTED_URLS = {
-  model: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/model.json',
-  metadata: 'https://storage.googleapis.com/tfjs-models/tfjs/sentiment_cnn_v1/metadata.json',
+const MODEL_DEF = {
+  model,
+  metadata
 };
 
-const LOCAL_URLS = {
-  model: './resources/model.json',
-  metadata: './resources/metadata.json',
-};
 
 async function loadHostedPretrainedModel(url) {
   try {
@@ -126,7 +125,7 @@ function doPredict(predict) {
 }
 
 export async function setupSentiment() {
-  const predictor = await new SentimentPredictor().init(HOSTED_URLS);
+  const predictor = await new SentimentPredictor().init(MODEL_DEF);
   return x => predictor.predict(x);
 }
 
